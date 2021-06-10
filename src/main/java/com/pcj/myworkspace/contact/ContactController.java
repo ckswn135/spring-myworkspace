@@ -92,6 +92,11 @@ public class ContactController {
 			return null;
 		}
 
+		if (contact.getName() == null && contact.getName().equals("")) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+
 		Contact toUpdateContact = findedContact.get();
 		toUpdateContact.setName(contact.getName());
 		toUpdateContact.setNumber(contact.getNumber());
