@@ -33,13 +33,13 @@ public class DustHourlyService {
 	public void requestDustHourlyData() throws IOException {
 		System.out.println(new Date().toLocaleString() + "--실행--");
 		//
-//		getDustHourlyData("PM10"); // 미세
-//		getDustHourlyData("PM25"); // 초미세
+		getDustHourlyData("PM10"); // 미세
+		getDustHourlyData("PM25"); // 초미세
 	}
 
 	// 데이터를 요청하는 메서드
 	private void getDustHourlyData(String itemCode) throws IOException {
-		String serviceKey = "qklD6o8bjQAtb2TTSJsXPqdwGVXBZUO2qedHkI6qieXUey97W7Lvjp3oguxcUBn9c59qgZ%2B5vWIkcO0eJELVZA%3D%3D";
+		String serviceKey = "ZXrForMW%2B7bGoyCLwU%2FoTqGRJz4mccLh917X2fFkUON44o4IiAodDEE%2BlGI1TTRh1U2FrZeLWWWtzkckwV7Mcg%3D%3D";
 
 		// 데이터 요청 URL을 만들어야 함
 		StringBuilder builder = new StringBuilder();
