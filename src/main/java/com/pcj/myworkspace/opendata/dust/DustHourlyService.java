@@ -29,6 +29,7 @@ public class DustHourlyService {
 
 	@SuppressWarnings("deprecation")
 	// 고정 비율, ms(milli second 단위), 1000 == 1초
+
 	@Scheduled(fixedRate = 1000 * 60 * 30) // 30분마다, 테스트용 스케줄, 프로그램이 시작될 때 한번은 바로 실행됨
 	public void requestDustHourlyData() throws IOException {
 		System.out.println(new Date().toLocaleString() + "--실행--");
@@ -39,7 +40,7 @@ public class DustHourlyService {
 
 	// 데이터를 요청하는 메서드
 	private void getDustHourlyData(String itemCode) throws IOException {
-		String serviceKey = "ZXrForMW%2B7bGoyCLwU%2FoTqGRJz4mccLh917X2fFkUON44o4IiAodDEE%2BlGI1TTRh1U2FrZeLWWWtzkckwV7Mcg%3D%3D";
+		String serviceKey = "qklD6o8bjQAtb2TTSJsXPqdwGVXBZUO2qedHkI6qieXUey97W7Lvjp3oguxcUBn9c59qgZ%2B5vWIkcO0eJELVZA%3D%3D";
 
 		// 데이터 요청 URL을 만들어야 함
 		StringBuilder builder = new StringBuilder();
@@ -60,8 +61,8 @@ public class DustHourlyService {
 		HttpURLConnection con = (HttpURLConnection) url.openConnection(); // URL 주소에 접속을 함
 		byte[] result = con.getInputStream().readAllBytes(); // 본문(body)데이터를 바이트 단위로 읽어들임
 
-		// 2. byte[] -> String(JSON)으로 변환
-		String data = new String(result);
+		// 2. byte[] -> String(JSON), UTF-8으로 변환
+		String data = new String(result, "UTF-8");
 		System.out.println(data);
 
 		// 3. String(JSON) -> Object로 변환을 해야함

@@ -38,7 +38,7 @@ public class DustHourlyServiceXml {
 
 	// 데이터를 요청하는 메서드
 	private void getDustHourlyData(String itemCode) throws IOException {
-		String serviceKey = "ZXrForMW%2B7bGoyCLwU%2FoTqGRJz4mccLh917X2fFkUON44o4IiAodDEE%2BlGI1TTRh1U2FrZeLWWWtzkckwV7Mcg%3D%3D";
+		String serviceKey = "qklD6o8bjQAtb2TTSJsXPqdwGVXBZUO2qedHkI6qieXUey97W7Lvjp3oguxcUBn9c59qgZ%2B5vWIkcO0eJELVZA%3D%3D";
 
 		// 데이터 요청 URL을 만들어야 함
 		StringBuilder builder = new StringBuilder();
@@ -59,8 +59,8 @@ public class DustHourlyServiceXml {
 		HttpURLConnection con = (HttpURLConnection) url.openConnection(); // URL 주소에 접속을 함
 		byte[] result = con.getInputStream().readAllBytes(); // 본문(body)데이터를 바이트 단위로 읽어들임
 
-		// 2. byte[] -> String(XML)으로 변환
-		String data = new String(result);
+		// 2. byte[] -> String(XML), UTF-8으로 변환
+		String data = new String(result, "UTF-8");
 //		System.out.println(data);
 
 		// 3. String(XML) -> String(JSON)으로 변환
