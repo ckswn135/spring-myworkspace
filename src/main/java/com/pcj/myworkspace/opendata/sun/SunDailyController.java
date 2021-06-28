@@ -22,7 +22,7 @@ public class SunDailyController {
 	public List<SunDaily> getListByDataType() {
 		Order[] orders = { new Order(Sort.Direction.DESC, "locdate"), new Order(Sort.Direction.ASC, "location") };
 
-		return repo.findAll(PageRequest.of(0, 7, Sort.by(orders))).toList();
+		return repo.findAll(PageRequest.of(0, 30, Sort.by(orders))).toList();
 	}
 
 }

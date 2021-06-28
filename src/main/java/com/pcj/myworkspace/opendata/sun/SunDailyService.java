@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONObject;
@@ -26,18 +27,34 @@ public class SunDailyService {
 	}
 
 	@SuppressWarnings("deprecation")
-
-//	@Scheduled(cron = " 0 0 0 1 * *")
-	@Scheduled(fixedRate = 1000 * 60 * 30)
+//	@Scheduled(fixedRate = 1000 * 60 * 30)
+	@Scheduled(cron = "0 0 0/1 * * *")
 	public void requestSunDailyData() throws IOException {
 		System.out.println(new Date().toLocaleString() + "--실행--");
 		getSunDailyData(URLEncoder.encode("서울", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("부산", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("인천", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("대구", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("대전", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("광주", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("울산", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("제주", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("동해", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("경주", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("강릉", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("포항", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("울산", "UTF-8"));
+		getSunDailyData(URLEncoder.encode("여수", "UTF-8"));
 	}
 
 	private void getSunDailyData(String location) throws IOException {
 		Date nowDate = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-		String timeNow = simpleDateFormat.format(nowDate);
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(nowDate);
+		cal.add(Calendar.DATE, +7);
+		String timeNow = simpleDateFormat.format(cal.getTime());
 
 		String serviceKey = "qklD6o8bjQAtb2TTSJsXPqdwGVXBZUO2qedHkI6qieXUey97W7Lvjp3oguxcUBn9c59qgZ%2B5vWIkcO0eJELVZA%3D%3D";
 
@@ -47,8 +64,6 @@ public class SunDailyService {
 		builder.append("?serviceKey=" + serviceKey);
 		builder.append("&locdate=" + timeNow);
 		builder.append("&location=" + location);
-		builder.append("&pageNo=1");
-		builder.append("&numOfRows=7");
 
 		System.out.println(builder.toString());
 
@@ -62,10 +77,9 @@ public class SunDailyService {
 		System.out.println(jObject.toString());
 
 		SunDailyResponse response = new Gson().fromJson(jObject.toString(), SunDailyResponse.class);
+		System.out.println(response);
 
-		for (SunDailyResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
-			repo.save(new SunDaily(item));
-		}
+		SunDailyResponse.Item item = response.getResponse().getBody().getItems().getItem();
+		repo.save(new SunDaily(item));
 	}
-
 }
