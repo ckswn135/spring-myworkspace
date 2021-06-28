@@ -43,7 +43,6 @@ public class SunDailyService {
 		getSunDailyData(URLEncoder.encode("경주", "UTF-8"));
 		getSunDailyData(URLEncoder.encode("강릉", "UTF-8"));
 		getSunDailyData(URLEncoder.encode("포항", "UTF-8"));
-		getSunDailyData(URLEncoder.encode("울산", "UTF-8"));
 		getSunDailyData(URLEncoder.encode("여수", "UTF-8"));
 	}
 
