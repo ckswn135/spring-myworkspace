@@ -13,6 +13,8 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 @Configuration
 public class RedisConnectionConfig {
 
+	// 팩터리 메서드 패턴, 객체 생성 공장
+	// 데이터베이스 접속 객체를 만들어주는 역할
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();

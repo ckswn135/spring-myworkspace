@@ -19,10 +19,10 @@ public class SunDailyController {
 	}
 
 	@RequestMapping(value = "/opendata/sun/daily", method = RequestMethod.GET)
-	public List<SunDaily> getListByDataType() {
+	public List<SunDaily> getListOrderByLocDate() {
 		Order[] orders = { new Order(Sort.Direction.DESC, "locdate"), new Order(Sort.Direction.ASC, "location") };
 
-		return repo.findAll(PageRequest.of(0, 389, Sort.by(orders))).toList();
+		return repo.findAll(PageRequest.of(0, 399, Sort.by(orders))).toList();
 	}
 
 }

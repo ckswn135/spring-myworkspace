@@ -24,7 +24,7 @@ public class DustHourlyController {
 	// key : 캐시할 객체의 key
 	@Cacheable(cacheNames = "dust-hourly", key = "0")
 	@RequestMapping(value = "/opendata/dust/hourly", method = RequestMethod.GET)
-	public List<DustHourly> getListByDataType() {
+	public List<DustHourly> getListOrderByDataTime() {
 		Order[] orders = { new Order(Sort.Direction.DESC, "dataTime"), new Order(Sort.Direction.ASC, "itemCode") };
 
 		// 최근 12시간의 데이터만 조회(pm10, pm2.5)
