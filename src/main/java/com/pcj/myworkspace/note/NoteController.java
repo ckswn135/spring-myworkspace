@@ -1,4 +1,4 @@
-package com.pcj.myworkspace.memo;
+package com.pcj.myworkspace.note;
 
 import java.util.Date;
 import java.util.List;
@@ -31,22 +31,17 @@ public class NoteController {
 		this.repo = repo;
 	}
 
-	@GetMapping(value = "/note")
+	@GetMapping(value = "/notes")
 	public List<Note> getNoteList() {
 		return repo.findAll(Sort.by("id").descending());
 	}
 
-	@GetMapping(value = "/note/paging")
+	@GetMapping(value = "/notes/paging")
 	public Page<Note> getNoteListPaging(@RequestParam int page, @RequestParam int size) {
 		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
 	}
 
-	@GetMapping(value = "/note/search")
-	public Page<Note> getNoteListSearch(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
-		return repo.findByMemoContaining(PageRequest.of(page, size, Sort.by("id").descending()), keyword);
-	}
-
-	@PostMapping(value = "/note")
+	@PostMapping(value = "/notes")
 	public Note addNote(@RequestBody Note note, HttpServletResponse res) {
 
 		if (note.getMemo() == null || note.getMemo().equals("")) {
@@ -57,7 +52,7 @@ public class NoteController {
 		return repo.save(note);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/note/{id}")
+	@RequestMapping(method = RequestMethod.GET, value = "/notes/{id}")
 	public Note getNote(@PathVariable int id, HttpServletResponse res) {
 		Optional<Note> note = repo.findById(id);
 
@@ -68,7 +63,7 @@ public class NoteController {
 		return note.get();
 	}
 
-	@DeleteMapping(value = "/note/{id}")
+	@DeleteMapping(value = "/notes/{id}")
 	public boolean removeNote(@PathVariable int id, HttpServletResponse res) {
 		Optional<Note> note = repo.findById(id);
 
@@ -81,7 +76,7 @@ public class NoteController {
 		return true;
 	}
 
-	@PutMapping(value = "/note/{id}")
+	@PutMapping(value = "/notes/{id}")
 	public Note modifyNote(@PathVariable int id, @RequestBody Note note, HttpServletResponse res) {
 		Optional<Note> findedNote = repo.findById(id);
 

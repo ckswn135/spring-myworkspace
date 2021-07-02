@@ -1,4 +1,4 @@
-package com.pcj.myworkspace.memo;
+package com.pcj.myworkspace.note;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
